@@ -1,0 +1,18 @@
+
+
+.button{
+
+    -fx-padding: 12px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
+    -fx-font-size: 15pt ;
+
+}
+.label{
+    -fx-font-size: 20pt;
+}
+.text-field{
+    -fx-max-width: 200px;
+    -fx-font-size: 15;
+}
+

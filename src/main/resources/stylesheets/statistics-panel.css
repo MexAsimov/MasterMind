@@ -1,0 +1,10 @@
+.button{
+    -fx-padding: 22px;
+    -fx-border-insets: 20px;
+    -fx-background-insets: 20px;
+    -fx-font-size: 15pt ;
+
+}
+.label{
+    -fx-font-size: 20pt;
+}

@@ -1,0 +1,12 @@
+#loginTextField{
+    -fx-start-margin: 15px;
+    -fx-max-width: 200px;
+    -fx-min-width: 100px;
+}
+
+#passwordField{
+    -fx-max-width: 200px;
+    -fx-min-width: 100px;
+    -fx-start-margin: 15px;
+
+}

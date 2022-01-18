@@ -1,0 +1,13 @@
+.button{
+    -fx-start-margin: 15px;
+    -fx-max-width: 200px;
+    -fx-min-width: 100px;
+    -fx-min-height: 70px;
+    -fx-font-size: 15pt ;
+
+
+}
+#startPanel{
+    -fx-alignment: center ;
+
+}
