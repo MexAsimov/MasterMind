@@ -3,5 +3,5 @@
 
 ## Used technologies and design patterns
 
-- Hibernate - Data Mapper
+- Hibernate - Data Mapper (used local Derby server)
 - JavaFX - MVC/MVP
