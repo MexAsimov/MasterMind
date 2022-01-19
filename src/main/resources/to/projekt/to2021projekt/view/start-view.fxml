@@ -22,7 +22,7 @@
         </Button>
         <Button fx:id="settingsBtn" mnemonicParsing="false" text="Settings" onAction="#showSettings">
             <VBox.margin>
-                <Insets left="10.0" top="50.0" />
+                <Insets left="10.0" top="30.0" />
             </VBox.margin>
         </Button>
 

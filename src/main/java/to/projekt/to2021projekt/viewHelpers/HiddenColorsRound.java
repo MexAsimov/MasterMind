@@ -1,13 +1,11 @@
 package to.projekt.to2021projekt.viewHelpers;
 
-import javafx.scene.image.Image;
-
 import java.util.ArrayList;
 
-public class HiddenColorsRound extends AbstractRound{
+public class HiddenColorsRound extends AbstractRound {
 
-    public HiddenColorsRound(int columnsNumber, String iconPath) {
-        super(columnsNumber, -1, iconPath, "dark.png", "dark.png");
+    public HiddenColorsRound(int columnsNumber) {
+        super(columnsNumber, -1, "gray");
         createRound();
     }
 
@@ -15,10 +13,11 @@ public class HiddenColorsRound extends AbstractRound{
         for(int i = 0; i < colors.size(); ++i) roundColors.get(i).setColor(colors.get(i));
     }
 
-    public void showHiddenColors(ArrayList<String> colorsUrls) {
+    public void showHiddenColors(ArrayList<String> colors) {
         int index = 0;
         for(ColorIconView view: roundColors) {
-            view.setImage(new Image(absoluteIconPath + colorsUrls.get(index) + ".png"));
+            view.setColor(colors.get(index));
+            view.setLightIcon();
             index++;
         }
     }

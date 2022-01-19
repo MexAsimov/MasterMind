@@ -6,48 +6,47 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="to.projekt.to2021projekt.controllers.LoginController">
-    <Label fx:id="loginLabel" prefHeight="26.0" prefWidth="46.0" text="Login">
-      <font>
-         <Font size="16.0" />
-      </font>
-      <VBox.margin>
-         <Insets left="10.0" top="10.0" />
-      </VBox.margin></Label>
-    <TextField fx:id="loginTextField">
-      <VBox.margin>
-         <Insets left="10.0" top="10.0" />
-      </VBox.margin></TextField>
-   <Label fx:id="loginErrorLabel" textFill="RED">
-      <VBox.margin>
-         <Insets left="10.0" top="10.0" />
-      </VBox.margin>
-   </Label>
-    <Label fx:id="passwordLabel" text="Hasło">
-      <font>
-         <Font size="16.0" />
-      </font>
-      <VBox.margin>
-         <Insets left="10.0" top="10.0" />
-      </VBox.margin></Label>
-    <PasswordField fx:id="passwordField">
-      <VBox.margin>
-         <Insets left="10.0" top="10.0" />
-      </VBox.margin></PasswordField>
-   <Label fx:id="passwordError" textFill="RED">
-      <VBox.margin>
-         <Insets left="10.0" />
-      </VBox.margin>
-   </Label>
+   <HBox prefHeight="260.0" prefWidth="600.0">
+      <children>
+         <VBox alignment="CENTER_LEFT" maxHeight="200.0" prefHeight="200.0" prefWidth="313.0">
+            <children>
+                <Label fx:id="loginLabel" prefHeight="26.0" prefWidth="46.0" text="Login">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Label>
+                <TextField fx:id="loginTextField" prefHeight="26.0" prefWidth="431.0" />
+               <Label fx:id="loginErrorLabel" textFill="RED" />
+                <Label fx:id="passwordLabel" text="Hasło">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Label>
+                <PasswordField fx:id="passwordField" />
+               <Label fx:id="passwordError" textFill="RED" />
+            </children>
+         </VBox>
+         <ImageView fx:id="logo" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <HBox.margin>
+               <Insets left="25.0" />
+            </HBox.margin>
+         </ImageView>
+      </children>
+      <padding>
+         <Insets left="15.0" right="15.0" top="15.0" />
+      </padding>
+   </HBox>
    <HBox prefHeight="100.0" prefWidth="200.0">
       <children>
           <Button fx:id="loginButton" onMouseClicked="#login" text="Zaloguj">
             <HBox.margin>
-               <Insets left="20.0" />
+               <Insets />
             </HBox.margin></Button>
          <Hyperlink fx:id="linkToRegister" onMouseClicked="#redirectToRegistration" text="Don't have account? Register here">
             <HBox.margin>
@@ -55,7 +54,7 @@
             </HBox.margin></Hyperlink>
       </children>
       <VBox.margin>
-         <Insets left="10.0" top="10.0" />
+         <Insets left="15.0" top="10.0" />
       </VBox.margin>
    </HBox>
 </VBox>

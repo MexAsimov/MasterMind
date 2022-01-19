@@ -1,7 +1,7 @@
 package to.projekt.to2021projekt.viewHelpers;
 
 import javafx.geometry.Pos;
-import javafx.scene.image.Image;
+import javafx.scene.Cursor;
 import javafx.scene.layout.HBox;
 
 import java.util.ArrayList;
@@ -9,18 +9,15 @@ import java.util.ArrayList;
 public abstract class AbstractRound extends HBox {
     protected final int columnsNumber;
     protected final int roundNumber;
-    protected final String defaultColorUrl;
-    protected final String defaultDarkColorUrl;
-    protected final String absoluteIconPath;
+    protected final String color;
+
     protected final ArrayList<ColorIconView> roundColors = new ArrayList<>();
 
-    public AbstractRound(int columnsNumber, int roundNumber, String iconPath, String iconFilename, String darkIconFilename) {
+    public AbstractRound(int columnsNumber, int roundNumber, String color) {
         this.setAlignment(Pos.CENTER);
-        this.absoluteIconPath = iconPath;
         this.columnsNumber = columnsNumber;
         this.roundNumber = roundNumber;
-        this.defaultColorUrl = absoluteIconPath + iconFilename;
-        this.defaultDarkColorUrl = absoluteIconPath + darkIconFilename;
+        this.color = color;
     }
 
     protected void createRound() {
@@ -28,21 +25,20 @@ public abstract class AbstractRound extends HBox {
         box.setSpacing(10);
 
         for (int i = 0; i < this.columnsNumber; ++i) {
-            ColorIconView view = new ColorIconView("gray", defaultColorUrl, defaultDarkColorUrl);
-            view.setFitWidth(45);
-            view.setFitHeight(45);
+            ColorIconView view = new ColorIconView(22.5,"gray");
             view.setOnMouseClicked(event -> {
                 if(!RoundState.getColor().isEmpty() && RoundState.getRoundCounter() == this.roundNumber){
-                    Image im1 = new Image(absoluteIconPath + RoundState.getColor() + ".png");
-                    view.setImage(im1);
                     view.setColor(RoundState.getColor());
+                    view.setLightIcon();
                 }
             });
             view.setOnMouseEntered(event -> {
+                setCursor(Cursor.HAND);
                 if(RoundState.getRoundCounter() == this.roundNumber
-                        && view.getColor().equals("gray")) view.setDarkIcon();
+                        && (view.getColor().equals("gray"))) view.setDarkIcon();
             });
             view.setOnMouseExited(event -> {
+                setCursor(Cursor.DEFAULT);
                 if(RoundState.getRoundCounter() == this.roundNumber
                         && view.getColor().equals("gray")) view.setLightIcon();
             });

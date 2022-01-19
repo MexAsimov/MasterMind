@@ -3,12 +3,14 @@ package to.projekt.to2021projekt.controllers;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import to.projekt.to2021projekt.FXutils.SceneProvider;
 import to.projekt.to2021projekt.FXutils.StageProvider;
 import to.projekt.to2021projekt.hibernate.SessionProvider;
@@ -18,14 +20,13 @@ import to.projekt.to2021projekt.models.User;
 import to.projekt.to2021projekt.util.ConfigSerializer;
 import to.projekt.to2021projekt.util.MailController;
 import to.projekt.to2021projekt.util.MailType;
-import to.projekt.to2021projekt.viewHelpers.ColorIconView;
-import to.projekt.to2021projekt.viewHelpers.ColorRound;
-import to.projekt.to2021projekt.viewHelpers.HiddenColorsRound;
+import to.projekt.to2021projekt.viewHelpers.*;
 import to.projekt.to2021projekt.viewHelpers.RoundState;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.*;
+import javafx.scene.Cursor;
 
 public class BoardController {
 
@@ -49,6 +50,9 @@ public class BoardController {
     public Label minutesField;
     @FXML
     public Label secondsField;
+    @FXML
+    public VBox logoContainer;
+
     private int seconds = 0;
     private int minutes = 0;
     private Timer timer;
@@ -56,14 +60,12 @@ public class BoardController {
     private int numOfRounds;
     private boolean colorRepetition;
 
-    private String iconsAbsolutePath;
     private final ArrayList<ColorRound> roundList = new ArrayList<>();
     private HiddenColorsRound hiddenColorsRound;
     private int fullPoints, halfPoints;
     private ArrayList<String> colors;
 
-    private final String[] colorsNameArray = {"red", "orange", "yellow", "pink", "purple", "green", "blue", "turquoise"};
-    private final String[] darkColorsNameArray = {"red_dark", "orange_dark", "yellow_dark", "pink_dark", "purple_dark", "green_dark", "blue_dark", "turquoise_dark"};
+    private final String[] colorsNameArray = ColorProvider.getColorsNameArray();
     private final Random random = new Random();
     @FXML
     public void initialize() throws IOException {
@@ -80,7 +82,6 @@ public class BoardController {
         this.numOfColors = configSerializer.getNumOfColors();
         this.numOfRounds = configSerializer.getNumOfRounds();
         this.colorRepetition = configSerializer.getColorRepetition();
-        iconsAbsolutePath = new java.io.File(".").getCanonicalPath() + "\\src\\main\\resources\\to\\projekt\\to2021projekt\\icons\\";
     }
 
     private void initializeTimer() {
@@ -96,16 +97,17 @@ public class BoardController {
     public void createColorsPalette()  {
         colorsContainer.setSpacing(20);
         HBox box;
+
         for(int j = 0; j < colorsNameArray.length/2; ++j) {
             box = new HBox();
+
             for (int i = 0; i < 2; ++i) {
                 box.setSpacing(20);
                 box.setAlignment(Pos.CENTER);
-                String path = iconsAbsolutePath + colorsNameArray[2*j + i] + ".png";
-                String darkPath = iconsAbsolutePath + darkColorsNameArray[2*j + i] + ".png";
-                ColorIconView view = new ColorIconView(colorsNameArray[2*j + i], path, darkPath);
-                view.setFitWidth(70);
-                view.setFitHeight(70);
+                String color =  colorsNameArray[2*j + i] ;
+                ColorIconView view = new ColorIconView(35.5, color);
+                view.getStyleClass().remove("color");
+                view.getStyleClass().add("colorPalette");
                 view.setOnMouseClicked(event -> {
                     RoundState.setColor(view.getColor());
                     if(RoundState.getColorView() != null) {
@@ -116,8 +118,12 @@ public class BoardController {
                     view.click();
                     RoundState.setColorView(view);
                 });
-                view.setOnMouseEntered(event -> view.setDarkIcon());
+                view.setOnMouseEntered(event -> {
+                    view.setCursor(Cursor.HAND);
+                    view.setDarkIcon();
+                });
                 view.setOnMouseExited(event -> {
+                    view.setCursor(Cursor.DEFAULT);
                     if(!view.isClicked()) view.setLightIcon();
                 });
                 box.getChildren().add(view);
@@ -128,7 +134,7 @@ public class BoardController {
 
     public void createHiddenColors() {
         hiddenColors.setAlignment(Pos.CENTER);
-        hiddenColorsRound = new HiddenColorsRound(this.numOfColors, iconsAbsolutePath);
+        hiddenColorsRound = new HiddenColorsRound(this.numOfColors );
         colors = new ArrayList<>();
         for(int i = 0; i < this.numOfColors; i++){
             int index = random.nextInt(colorsNameArray.length);
@@ -144,7 +150,7 @@ public class BoardController {
     public void createRoundBoard() {
         roundColors.setSpacing(10);
         for(int j = this.numOfRounds - 1; j >=0; --j) {
-            ColorRound box = new ColorRound(j , this.numOfColors, iconsAbsolutePath);
+            ColorRound box = new ColorRound(j , this.numOfColors);
             roundList.add(box);
             roundColors.getChildren().add(box);
         }
@@ -154,6 +160,7 @@ public class BoardController {
 
     public void checkColorsRound() {
         ArrayList<String> setColors = roundList.get(RoundState.getRoundCounter()).getColorsArray();
+
         fullPoints = 0;
         halfPoints = 0;
 
@@ -162,6 +169,7 @@ public class BoardController {
         roundList.get(RoundState.getRoundCounter()).setResult(halfPoints, fullPoints);
         roundList.get(RoundState.getRoundCounter()).unsetRound();
         updateScore();
+
         if(isGameDone()){
             timer.cancel();
             endGame();
@@ -173,8 +181,11 @@ public class BoardController {
 
     public void restartGame() throws IOException {
         RoundState.resetState();
-        SceneProvider.getInstance().loadScene("view/masterMindView.fxml", "stylesheets/login-panel.css");
+        SceneProvider.getInstance().loadScene("view/board-view.fxml", "stylesheets/board-panel.css");
         StageProvider.getInstance().getStage().setScene(SceneProvider.getInstance().getScene());
+        StageProvider.getInstance().getStage().setResizable(false);
+        StageProvider.getInstance().getStage().setX(100);
+        StageProvider.getInstance().getStage().setY(10);
         this.initialize();
     }
 

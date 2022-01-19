@@ -41,7 +41,10 @@ public class StartController {
     }
 
     public void startNewGame(ActionEvent actionEvent) throws MessagingException {
-        SceneProvider.getInstance().loadScene("view/masterMindView.fxml", "stylesheets/login-panel.css");
+        SceneProvider.getInstance().loadScene("view/board-view.fxml", "stylesheets/board-panel.css");
         StageProvider.getInstance().getStage().setScene(SceneProvider.getInstance().getScene());
+        StageProvider.getInstance().getStage().setResizable(false);
+        StageProvider.getInstance().getStage().setX(100);
+        StageProvider.getInstance().getStage().setY(10);
     }
 }

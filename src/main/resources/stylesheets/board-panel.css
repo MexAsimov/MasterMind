@@ -1,0 +1,83 @@
+.button{
+    -fx-background-color: #005248  ;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-pref-height: 30;
+    -fx-border-color: #f4c836 ;
+    -fx-border-width: 2;
+    -fx-border-radius: 2;
+}
+
+.button:hover{
+    -fx-background-color: #00a591  ;
+    -fx-cursor: hand;
+}
+
+#roundColors{
+    -fx-background-color: #007265         ;
+    -fx-padding: 30;
+    -fx-border-width: 0 5 0 0;
+    -fx-border-color: #212224;
+}
+
+#colorsContainer{
+    -fx-background-color: #4e4f51        ;
+    -fx-border-width: 5 0 0 0;
+    -fx-border-color: #414244;
+}
+
+#logoContainer{
+    -fx-border-width: 4 4 4 4;
+    -fx-border-color: #f4c836;
+}
+
+#footer{
+    -fx-background-color: #4e4f51  ;
+    -fx-border-width: 5 5 5 5;
+    -fx-border-color: #212224;
+}
+
+.label{
+    -fx-text-fill: #ffffff;
+}
+
+#leftPanel{
+    -fx-background-color: #00a591       ;
+    -fx-border-width: 5 5 0 5;
+    -fx-border-color: #212224;
+}
+
+#hiddenColors{
+    -fx-background-color: #4e4f51  ;
+    -fx-border-width: 5 5 5 0;
+    -fx-border-color: #212224;
+}
+
+.round{
+    -fx-padding: 5 0 5 0;
+}
+
+.setRound{
+    -fx-border-color: #f4c836;
+    -fx-border-width: 3;
+    -fx-background-color: #00a591       ;
+}
+
+.color{
+    -fx-stroke: #212224   ;
+    -fx-stroke-width: 1;
+}
+
+.colorPalette{
+    -fx-stroke: #212224;
+    -fx-stroke-width: 3;
+}
+
+.colorSetRound{
+    -fx-stroke: #212224;
+    -fx-stroke-width: 3;
+}
+
+#boardLogo{
+    -fx-image: url("/to/projekt/to2021projekt/logo/logo.png");
+}

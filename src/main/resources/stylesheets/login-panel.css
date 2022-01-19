@@ -10,3 +10,7 @@
     -fx-start-margin: 15px;
 
 }
+
+#logo{
+    -fx-image: url("/to/projekt/to2021projekt/logo/logo.png");
+}
